@@ -47,6 +47,7 @@ Ensure you have the following installed:
 ### Setup Instructions
 
 #### Frontend
+
 sh
 cd Job-Portal
 npm install
@@ -54,6 +55,7 @@ npm run dev
 
 
 #### Backend
+
 sh
 cd Backend
 npm install
