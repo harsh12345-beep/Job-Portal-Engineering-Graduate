@@ -57,15 +57,17 @@ const JobApplication = () => {
   const displayedApplicants = filter === "applicants" ? applicants : shortlisted;
 
   return (
-    <div className="p-4 md:p-8 max-w-7xl mx-auto">
+    <div className="p-4 md:p-8 max-w-7xl mx-auto flex flex-col items-center">
+      {/* Title */}
       <h1 className="text-2xl md:text-3xl font-bold text-center mb-6 text-blue-700">
         Job Application
       </h1>
-
+  
+      {/* Error Message */}
       {error && <p className="text-red-500 text-center">{error}</p>}
-
+  
       {/* Mobile Filter */}
-      <div className="md:hidden flex justify-center mb-4">
+      <div className="md:hidden flex justify-center mb-4 w-full">
         <select
           className="p-2 border rounded-lg"
           value={filter}
@@ -75,105 +77,48 @@ const JobApplication = () => {
           <option value="shortlisted">Shortlisted</option>
         </select>
       </div>
-
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+  
+      {/* Main Content Grid */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full justify-center">
         {/* Applications Section */}
-        <div className="bg-[#F8F9FA] rounded-lg shadow-lg p-4 md:p-6 md:col-span-2">
-          <h2 className="text-lg font-bold mb-4">
-            {filter === "applicants"
-              ? "All Applications"
-              : "Shortlisted Candidates"}
+        <div className="bg-[#F8F9FA] rounded-lg shadow-lg p-4 md:p-6 md:col-span-2 w-full">
+          <h2 className="text-lg font-bold mb-4 text-center">
+            {filter === "applicants" ? "All Applications" : "Shortlisted Candidates"}
             <span className="text-gray-500"> {displayedApplicants.length}</span>
           </h2>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+  
+          {/* Applicants Grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full justify-center">
             {displayedApplicants.map((applicant) => (
               <div
                 key={applicant.id}
-                className="bg-white shadow-md rounded-lg p-5 border flex flex-col transition hover:shadow-lg"
+                className="bg-white shadow-md rounded-lg p-5 border flex flex-col transition hover:shadow-lg items-center text-center w-full"
               >
-                <div className="flex items-center gap-3">
+                {/* Profile Image & Name */}
+                <div className="flex flex-col items-center">
                   <img
                     src={profileImg}
                     alt={applicant.name}
                     className="h-14 w-14 rounded-full border"
                   />
-                  <div>
+                  <div className="mt-2">
                     <h3 className="font-semibold text-lg">{applicant.name}</h3>
                     <p className="text-sm text-gray-500">{applicant.role}</p>
                   </div>
                 </div>
-
-                <div className="mt-4 text-sm text-gray-600">
-                  <p className="flex items-center gap-1">
+  
+                {/* Applicant Details */}
+                <div className="mt-4 text-sm text-gray-600 w-full">
+                  <p className="flex items-center justify-center gap-1">
                     📚 <span>Education: {applicant.education}</span>
                   </p>
-                  <p className="flex items-center gap-1">
+                  <p className="flex items-center justify-center gap-1">
                     💼 <span>Experience: {applicant.experience}</span>
                   </p>
-                  <p className="flex items-center gap-1">
+                  <p className="flex items-center justify-center gap-1">
                     📅 <span>Applied: {applicant.applied}</span>
                   </p>
                 </div>
-
-                <div className="mt-4 flex gap-2">
-                  <button
-                    className="px-4 py-1 bg-green-500 text-white text-sm rounded-md hover:bg-green-600 transition"
-                    
-                  >
-                    Accept
-                  </button>
-                  <button
-                    className="px-4 py-1 bg-red-500 text-white text-sm rounded-md hover:bg-red-600 transition"
-                  
-                  >
-                    Reject
-                  </button>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Shortlisted Section */}
-        <div className="hidden md:block bg-[#F8F9FA] rounded-lg shadow-lg p-4 md:p-6">
-          <h2 className="text-lg font-bold mb-4">
-            Shortlisted{" "}
-            <span className="text-gray-500">{shortlisted.length}</span>
-          </h2>
-          <div className="grid grid-cols-1 gap-4">
-            {shortlisted.map((applicant) => (
-              <div
-                key={applicant.id}
-                className="bg-white shadow-md rounded-lg p-5 border flex flex-col transition hover:shadow-lg"
-              >
-                <div className="flex items-center gap-3">
-                  <img
-                    src={profileImg}
-                    alt={applicant.name}
-                    className="h-14 w-14 rounded-full border"
-                  />
-                  <div>
-                    <h3 className="font-semibold text-lg">{applicant.name}</h3>
-                    <p className="text-sm text-gray-500">{applicant.role}</p>
-                  </div>
-                </div>
-
-                <div className="mt-4 text-sm text-gray-600">
-                  <p className="flex items-center gap-1">
-                    📚 <span>Education: {applicant.education}</span>
-                  </p>
-                  <p className="flex items-center gap-1">
-                    💼 <span>Experience: {applicant.experience}</span>
-                  </p>
-                  <p className="flex items-center gap-1">
-                    📅 <span>Applied: {applicant.applied}</span>
-                  </p>
-                </div>
-
-                <button className="mt-4 px-4 py-1 bg-red-500 text-white text-sm rounded-md hover:bg-red-600 transition">
-                  Remove
-                </button>
               </div>
             ))}
           </div>
@@ -181,6 +126,7 @@ const JobApplication = () => {
       </div>
     </div>
   );
+  
 };
 
 export default JobApplication;

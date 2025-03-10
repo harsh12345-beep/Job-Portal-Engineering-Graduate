@@ -71,16 +71,17 @@ export const applyForJob = async (req, res) => {
     // Create a new job application with experience
     const application = new JobApplication({
       job: jobId,
-      applications: req.user._id,
+      applicant: req.user._id, 
       firstName,
       lastName,
       email,
       phoneNumber,
       employmentStatus,
       education,
-      experience, 
+      experience: Number(experience) || 0, // Convert to number
       resume,
     });
+    
 
     await application.save();
 

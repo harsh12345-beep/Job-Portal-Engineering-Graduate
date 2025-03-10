@@ -37,9 +37,8 @@ const Dashboard = () => {
         );
 
         if (!response.ok) {
-          throw new Error(`Error: ${response.statusText}`);
+          throw new Error(`Jobs: ${response.statusText}`);
         }
-
         const data = await response.json();
         setJobCount(data.jobs?.length || 0);
         setJobs(data.jobs || []);

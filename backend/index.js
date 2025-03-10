@@ -11,13 +11,19 @@ import adminRoute from "./routes/adminroute.js";
 dotenv.config();
 
 const app = express();
-
 app.use(express.json());
-app.use(cookieParser()); 
+app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
 
+// **Dynamic CORS Configuration**
 const corsOptions = {
-    origin: ["http://localhost:5173", "http://localhost:5175", "http://localhost:5174","http://localhost:5176"],
+    origin: (origin, callback) => {
+        if (!origin || origin.startsWith("http://localhost:")) {
+            callback(null, true); 
+        } else {
+            callback(new Error("Not allowed by CORS"));
+        }
+    },
     credentials: true, 
     methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"], 

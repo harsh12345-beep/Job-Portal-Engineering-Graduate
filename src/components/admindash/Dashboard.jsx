@@ -29,7 +29,7 @@ const Dashboard = () => {
           "http://localhost:8000/api/v1/user/unverified-users"
         );
         if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${response.status}`);
+          throw new Error(`No Data Found`);
         }
         const data = await response.json();
         console.log(data);

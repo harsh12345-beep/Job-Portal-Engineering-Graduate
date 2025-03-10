@@ -9,20 +9,23 @@ import googleLogo from "../assets/google.jpg";
 import microsoftLogo from "../assets/microsoft.webp";
 import flipkartLogo from "../assets/flipkart.png";
 import youtubeLogo from "../assets/youtube.png";
+import { useParams } from "react-router-dom";
 import ibmLogo from "../assets/ibm.jpg";
 import einfratechLogo from "../assets/Einfratech.png";
 
 const LandingPage = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [jobs, setJobs] = useState([]); // State to store fetched jobs
+  const [jobs, setJobs] = useState([]); 
+  const { id } = useParams();
 
   // Fetch jobs from backend API
   useEffect(() => {
+    
     const fetchJobs = async () => {
       try {
         const response = await fetch("http://localhost:8000/api/v1/job/jobs");
         const data = await response.json();
-        console.log("Fetched Jobs:", data); // Debugging line
+        console.log("Fetched Jobs:", data);
 
         // If data is an object containing a jobs array, update accordingly
         setJobs(data.jobs || data);
@@ -170,14 +173,14 @@ const LandingPage = () => {
             </p>
             <div className="d-flex justify-content-between mt-3">
               <Link
-                to={`/jobdescription`}
+                to={`/job/${job._id}`}
                 className="btn border-primary text-primary"
                 style={{ borderRadius: "8px" }}
               >
                 View details
               </Link>
               <Link
-                to={`/jobapplication`}
+                to={`/signin`}
                 className="btn text-white"
                 style={{ backgroundColor: "#1E3A8A", borderRadius: "8px" }}
               >
